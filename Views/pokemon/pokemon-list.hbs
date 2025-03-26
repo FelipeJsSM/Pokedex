@@ -1,0 +1,37 @@
+<h1>Administrar Pokemones</h1>
+
+{{#if hasPokemons}}
+<div class="row">
+    {{#each poks}}
+    <div class="col-12 col-sm-4">
+        <div class="card">
+            <img src="{{this.imageUrl}}" class="card-img-top img-size" alt="{{this.name}}" />
+            <div class="card-body">
+                <h5 class="card-title">Nombre: {{this.name}}</h5>
+                <p class="card-text">
+                    Region: {{this.Region.name}} - Tipo: {{this.Type.name}}
+                </p>
+            </div>
+            <div class="mt-2">
+                <a href="/edit-pokemon/{{this.id}}" class="btn btn-primary float-end">Editar</a>
+
+                <form method="post" action="/delete-pokemon" class="form-delete">
+                    <input type="hidden" value="{{this.id}}" name="PokemonId" />
+                    <button type="submit" class="btn btn-danger float-end me-2 delete-pokemon">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+{{else}}
+<h3 class="mt-3 text-center">No hay Pokemon registrados</h3>
+{{/if}}
+
+<hr />
+
+<div class="row mt-2 mb-2">
+    <div class="col-12 col-sm-4">
+        <a href="/create-pokemon" class="btn btn-success">Agregar Pokemon</a>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<h1>Lista de Pokemones</h1>
+
+<form method="GET" action="/">
+  <div class="row mb-3">
+    <div class="col-12 col-sm-4">
+      <label for="name" class="form-label">Buscar por nombre:</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        id="name" 
+        name="name"
+        value="{{selectedName}}" 
+      />
+    </div>
+
+    <div class="col-12 col-sm-4">
+      <label for="regionId" class="form-label">Filtrar por región:</label>
+      <select class="form-select" id="regionId" name="regionId">
+        <option value="">Todas las regiones</option>
+        {{#each regions}}
+          <option 
+            value="{{this.id}}" 
+            {{#if (eq this.id ../selectedRegion)}}selected{{/if}}
+          >
+            {{this.name}}
+          </option>
+        {{/each}}
+      </select>
+    </div>
+
+    <div class="col-12 col-sm-4 mt-4">
+      <button type="submit" class="btn btn-primary mt-2">
+        Buscar
+      </button>
+    </div>
+  </div>
+</form>
+
+<hr />
+
+{{#if hasPokemons}}
+
+<div class="row">
+
+    {{#each pokemons}}
+
+    <div class="col-12 col-sm-4">
+        <div class="card">
+            <img src="{{this.imageUrl}}" class="card-img-top img-size" alt="..." />
+            <div class="card-body">
+                <h5 class="card-title">Nombre: {{this.name}}</h5>
+                <p class="card-text">Region: {{this.Region.name}} - Tipo {{this.Type.name}}</p>
+            </div>
+        </div>
+    </div>
+
+    {{/each}}
+
+</div>
+
+{{else}}
+
+<h1>No se encontraron Pokemones</h1>
+
+{{/if}}

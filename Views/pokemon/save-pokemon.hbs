@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-12 col-sm-6 offset-sm-3">
+        <div class="card">
+            <div class="card-header bg-primary text-light">
+                {{#if editMode}}Editar Pokémon{{else}}Crear Pokémon{{/if}}
+            </div>
+            <div class="card-body">
+                <form id="pokemonForm" method="POST" action="/{{#if editMode}}edit-pokemon{{else}}create-pokemon{{/if}}">
+                    <div class="mb-3">
+                        <label for="pokemonName" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="pokemonName" name="Name" {{#if
+                            editMode}}value="{{pokemon.name}}" {{/if}} />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="imageUrl" class="form-label">Imagen (URL):</label>
+                        <input type="text" class="form-control" id="imageUrl" name="imageUrl" {{#if
+                            editMode}}value="{{pokemon.imageUrl}}" {{/if}} />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="regionId" class="form-label">Region:</label>
+                        <select class="form-select" id="regionId" name="regionId">
+                            <option value="">Selecciona una opcion</option>
+                            {{#each regions}}
+                            <option value="{{this.id}}" {{#if (eq this.id ../pokemon.regionId)}}selected{{/if}}>
+                                {{this.name}}
+                            </option>
+                            {{/each}}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="tipoId" class="form-label">Tipo:</label>
+                        <select class="form-select" id="tipoId" name="tipoId">
+                            <option value="">Selecciona una opcion</option>
+                            {{#each types}}
+                            <option value="{{this.id}}" {{#if (eq this.id ../pokemon.tipoId)}}selected{{/if}}>
+                                {{this.name}}
+                            </option>
+                            {{/each}}
+                        </select>
+                    </div>
+
+                    {{#if editMode}}
+                    <!-- Input oculto para ID en caso de edición -->
+                    <input type="hidden" value="{{pokemon.id}}" name="PokemonId" />
+                    {{/if}}
+
+                    <button type="submit" class="btn btn-primary float-end">
+                        {{#if editMode}}Guardar{{else}}Crear{{/if}}
+                    </button>
+                    <a href="/pokemons" class="btn btn-warning float-end me-2">Volver</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-12 col-sm-6 offset-sm-3">
+        <div class="card">
+            <div class="card-header bg-primary text-light">
+                {{#if editMode}}Editar Region{{else}}Crear Region{{/if}}
+            </div>
+            <div class="card-body">
+                <form id="regionForm" method="POST" action="/{{#if editMode}}edit-region{{else}}create-region{{/if}}">
+                    <div class="mb-3">
+                        <label for="Name" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="Name" name="Name" {{#if
+                            editMode}}value="{{region.name}}" {{/if}} />
+                    </div>
+
+                    {{#if editMode}}
+                    <input type="hidden" value="{{region.id}}" name="RegionId" />
+                    {{/if}}
+
+                    <button type="submit" class="btn btn-primary float-end">
+                        {{#if editMode}}Guardar{{else}}Crear{{/if}}
+                    </button>
+                    <a href="/regions" class="btn btn-warning float-end me-2">Volver</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
